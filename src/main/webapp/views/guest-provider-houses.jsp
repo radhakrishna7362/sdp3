@@ -9,6 +9,9 @@
 <body>
 <jsp:include page="guest-provider-logout.jsp"/>
 <div class="m-2">
+	<a href="/add-guest-house" class="btn btn-success"><strong>+</strong> Guest House</a>
+</div>
+<div class="m-2">
 	<div class="card">
 	    <div class="card-body">	    
 		    <h3 class="card-title">Your Guest Houses</h3>
@@ -21,11 +24,12 @@
 		            <th scope="col">House State</th>
 		            <th scope="col">House Area</th>
 		            <th scope="col">Status</th>
+		            <th scope="col">View Requests</th>
 		        </thead>
 		        <tbody>
 		        	<c:forEach var="house" items="${houses}">
 		            <tr>
-		                <td><a href="/guest-provider-house-requests/${house.getId() }">${house.getId() }</a></td>
+		                <td>${house.getId() }</td>
 		                <td>${house.getProviderId() }</td>
 						<td>${house.getHouseType() }</td>
 		                <td>${house.getHouseCity() }</td>
@@ -39,6 +43,7 @@
 							     Pending
 							</c:if>
 		                </td>
+		                <td><a href="/guest-provider-house-requests/${house.getId() }">Check here</a></td>
 		            </tr>
 		            </c:forEach>
 		        </tbody>
@@ -46,5 +51,6 @@
 	    </div>
 	</div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

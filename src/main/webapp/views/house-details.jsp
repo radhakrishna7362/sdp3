@@ -50,8 +50,15 @@
 </div>
 <div align='center'>
 <a class="btn btn-primary" href='/house-approval/${house.getId()}'>Approve</a>
+<a class="btn btn-danger" href='/house-reject/${house.getId()}'>Reject</a>
 <a class="btn btn-dark" href='/pending-house-approvals'>Back</a>
 </div>
+
+<video width="320" height="240" controls>
+  <source src="uploads/${house.getVideoProof() }" type="video/mp4">
+</video>
+
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 </html>

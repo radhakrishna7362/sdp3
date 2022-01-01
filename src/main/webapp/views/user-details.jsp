@@ -57,6 +57,7 @@
 <a class="btn btn-primary" href='/user-approval/${user.getId()}'>Approve</a>
 <a class="btn btn-dark" href='/pending-user-approvals'>Back</a>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 </html>

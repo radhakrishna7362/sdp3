@@ -57,6 +57,8 @@
 <div align='center'>
 <a class="btn btn-primary" href='/guest-provider-approval/${gp.getId()}'>Approve</a>
 <a class="btn btn-dark" href='/pending-guest-provider-approvals'>Back</a>
+</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 </html>

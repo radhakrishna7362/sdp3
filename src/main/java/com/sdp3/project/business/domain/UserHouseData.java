@@ -2,9 +2,11 @@ package com.sdp3.project.business.domain;
 
 import java.util.List;
 
+import com.sdp3.project.models.GuestProvider;
 import com.sdp3.project.models.House;
 
 public class UserHouseData {
+	private List<GuestProvider> guestProvider;
 	private List<House> houses;
 	private List<Boolean> isRequested;
 	private List<Boolean> isPending;
@@ -39,5 +41,11 @@ public class UserHouseData {
 	}
 	public void setCurrentStay(boolean currentStay) {
 		this.currentStay = currentStay;
+	}
+	public List<GuestProvider> getGuestProvider() {
+		return guestProvider;
+	}
+	public void setGuestProvider(List<GuestProvider> guestProvider) {
+		this.guestProvider = guestProvider;
 	}
 }

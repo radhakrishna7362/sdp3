@@ -16,6 +16,7 @@
 <input type="password" id="password" name="password" placeholder="Password">
 <input type="submit" value="Login">
 </form>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 </html>

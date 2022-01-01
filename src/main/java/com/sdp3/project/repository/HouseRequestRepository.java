@@ -14,4 +14,5 @@ public interface HouseRequestRepository extends JpaRepository<HouseRequest,Long>
 	Iterable<HouseRequest> findByHouseIdAndUserIdAndApprovalFalse(long houseId,long userId);
 	Iterable<HouseRequest> findByHouseIdAndUserIdAndApprovalTrue(long houseId,long userId);
 	HouseRequest findByUserIdAndApprovalTrue(long UserId);
+	Iterable<HouseRequest> findByUserIdAndApprovalFalse(long userId);
 }

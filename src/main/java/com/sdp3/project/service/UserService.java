@@ -37,6 +37,9 @@ public class UserService {
 		u.setGovernmentId(user.getGovernmentId());
 		u.setRole(user.getRole());
 		u.setPassword(user.getPassword());
+		u.setFirstName(user.getFirstName());
+		u.setLastName(user.getLastName());
+		u.setPhoneNo(user.getPhoneNo());
 		userRepository.save(u);
 	}
 	
@@ -50,7 +53,7 @@ public class UserService {
 	
 	public boolean validateUser(User user) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		User u = userRepository.findByuserName(user.getUserName());
+		User u = userRepository.findByuserNameAndApprovalTrue(user.getUserName());
 		if(u==null) {
 			return false;
 		}

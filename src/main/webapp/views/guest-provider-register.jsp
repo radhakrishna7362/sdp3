@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="wrapper">
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="guest-provider-logout.jsp"/>
 </div>
 <div class="page page-center">
     <div class="container-tight py-4">
@@ -24,27 +24,39 @@
             </div>
             <div class="mb-3">
 				<label for="userName" class="form-label">UserName</label>
-				<input type="text" class="form-control" id="userName" name="userName" placeholder="UserName">
+				<input type="text" class="form-control" id="userName" name="userName" required placeholder="UserName">
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">Email</label>
-				<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+				<input type="email" class="form-control" id="email" name="email" required placeholder="Email">
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label>
-				<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+				<input type="password" class="form-control" id="password" name="password" required placeholder="Password">
+			</div>
+			<div class="mb-3">
+				<label for="phoneNo" class="form-label">Phone No</label>
+				<input type="text" class="form-control" id="phoneNo" name="phoneNo" required placeholder="Phone No">
+			</div>
+			<div class="mb-3">
+				<label for="firstName" class="form-label">First Name</label>
+				<input type="text" class="form-control" id="firstName" name="firstName" required placeholder="First Name">
+			</div>
+			<div class="mb-3">
+				<label for="lastName" class="form-label">Last Name</label>
+				<input type="text" class="form-control" id="lastName" name="lastName" required placeholder="Last Name">
 			</div>
 			<div class="mb-3">
 				<label for="governmentId" class="form-label">Government Id</label>
-				<input type="text" class="form-control" id="governmentId" name="governmentId" placeholder="Government Id">
+				<input type="text" class="form-control" id="governmentId" name="governmentId" required placeholder="Government Id">
 			</div>
 			<div class="mb-3">
 				<label for="file" class="form-label">Government Id Proof</label>
-				<input type="file" class="form-control" name="file" id="file">
+				<input type="file" class="form-control" name="file" id="file" required>
 			</div>
 			<div class="mb-3">
 				<label for="address" class="form-label">Address</label>
-				<input type="text" class="form-control" id="address" name="address" placeholder="Address">
+				<input type="text" class="form-control" id="address" name="address" required placeholder="Address">
 			</div>
             <div class="form-footer">
               <button type="submit" class="btn btn-primary w-100">Sign Up</button>
@@ -58,5 +70,6 @@
       </form>
     </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

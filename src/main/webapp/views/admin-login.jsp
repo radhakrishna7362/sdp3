@@ -23,11 +23,11 @@
             </div>
             <div class="mb-3">
 				<label for="userName" class="form-label">UserName</label>
-				<input type="text" class="form-control" id="userName" name="userName" placeholder="UserName">
+				<input type="text" class="form-control" id="userName" name="userName" required placeholder="UserName">
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">Password</label>
-				<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+				<input type="password" class="form-control" id="password" name="password" required placeholder="Password">
 			</div>
             <div class="form-footer">
               <button type="submit" class="btn btn-primary w-100">Sign in</button>
@@ -36,7 +36,7 @@
       </form>
     </div>
 </div>
-
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 </html>

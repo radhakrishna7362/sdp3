@@ -23,15 +23,27 @@
 						</div>
                         <div class="mb-3">
 							<label for="userName" class="form-label">UserName</label>
-							<input type="text" class="form-control" id="userName" name="userName" value="${user.getUserName() }" placeholder="UserName">
+							<input type="text" class="form-control" id="userName" name="userName" value="${user.getUserName() }" required placeholder="UserName">
 						</div>
 						<div class="mb-3">
 							<label for="email" class="form-label">Email</label>
-							<input type="email" class="form-control" id="email" name="email" value="${user.getEmail() }" placeholder="Email">
+							<input type="email" class="form-control" id="email" name="email" value="${user.getEmail() }" required placeholder="Email">
+						</div>
+						<div class="mb-3">
+							<label for="phoneNo" class="form-label">Phone No</label>
+							<input type="text" class="form-control" id="phoneNo" name="phoneNo" value="${user.getPhoneNo() }" required placeholder="Phone No">
+						</div>
+						<div class="mb-3">
+							<label for="firstName" class="form-label">First Name</label>
+							<input type="text" class="form-control" id="firstName" name="firstName" value="${user.getFirstName() }" required placeholder="First Name">
+						</div>
+						<div class="mb-3">
+							<label for="lastName" class="form-label">Last Name</label>
+							<input type="text" class="form-control" id="lastName" name="lastName" value="${user.getLastName() }" required placeholder="Last Name">
 						</div>
 						<div class="mb-3">
 							<label for="governmentId" class="form-label">Government Id</label>
-							<input type="text" class="form-control" id="governmentId" name="governmentId" value="${user.getGovernmentId() }" placeholder="Government Id">
+							<input type="text" class="form-control" id="governmentId" name="governmentId" value="${user.getGovernmentId() }" required placeholder="Government Id">
 						</div>
 						<div class="mb-3">
 							<label for="role" class="form-label">Role</label>
@@ -52,5 +64,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

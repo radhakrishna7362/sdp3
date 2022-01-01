@@ -8,4 +8,6 @@ public interface HouseRepository extends JpaRepository<House,Long> {
 	Iterable<House> findByApprovalFalse();
 	Iterable<House> findByApprovalTrue();
 	Iterable<House> findByProviderId(long Id);
+	Iterable<House> findByAvailabilityTrue();
+	Iterable<House> findByAvailabilityTrueAndApprovalTrue();
 }

@@ -8,6 +8,7 @@ import com.sdp3.project.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 	User findByuserName(String userName);
+	User findByuserNameAndApprovalTrue(String userName);
 	Iterable<User> findByApprovalFalse();
 	Iterable<User> findByApprovalTrue();
 }

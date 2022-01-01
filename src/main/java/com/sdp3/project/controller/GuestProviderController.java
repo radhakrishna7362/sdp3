@@ -47,7 +47,7 @@ public class GuestProviderController {
 			session.setAttribute("userName", guestProvider.getUserName());
 			GuestProvider gp = guestProviderService.getGuestProviderByUserName(guestProvider.getUserName());
 			session.setAttribute("userId", gp.getId());
-			mv = new ModelAndView("redirect:/guest-provider-home");
+			mv = new ModelAndView("redirect:/guest-provider-houses/"+gp.getId());
 		}
 		else {
 			mv = new ModelAndView();
@@ -130,6 +130,39 @@ public class GuestProviderController {
 		gp.setApproval(true);
 		guestProviderService.updateGuestProvider(gp);
 		ModelAndView mv = new ModelAndView("redirect:/admin-home");
+		return mv;
+	}
+	
+	@GetMapping("/guest-provider-profile/{Id}")
+	public ModelAndView GuestProviderProfile(@PathVariable("Id")long Id) {
+		System.out.println("Hii");
+		GuestProvider gp = guestProviderService.getGuestProviderById(Id);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("guest_provider_profile");
+		mv.addObject("gp",gp);
+		return mv;
+	}
+	
+	@GetMapping("/edit-guest-provider-profile/{Id}")
+	public ModelAndView GuestProviderUpdateProfile(@PathVariable("Id")long Id) {
+		GuestProvider gp = guestProviderService.getGuestProviderById(Id);
+		ModelAndView mv = new ModelAndView("guestProvider","guestProvider",gp);
+		mv.setViewName("guest-provider-update-profile");
+		mv.addObject("gp",gp);
+		return mv;
+	}
+	
+	@PostMapping("/guest-provider-profile-update")
+	public ModelAndView UpdateProfile(@ModelAttribute("guestProvider") GuestProvider gp) {
+		System.out.println(gp.getId());
+		GuestProvider guestProvider = guestProviderService.getGuestProviderById(gp.getId());
+		guestProvider.setEmail(gp.getEmail());
+		guestProvider.setPhoneNo(gp.getPhoneNo());
+		guestProvider.setFirstName(gp.getFirstName());
+		guestProvider.setLastName(gp.getLastName());
+		guestProvider.setAddress(gp.getAddress());
+		guestProviderService.updateGuestProvider(guestProvider);
+		ModelAndView mv = new ModelAndView("redirect:/guest-provider-profile/"+guestProvider.getId());
 		return mv;
 	}
 }

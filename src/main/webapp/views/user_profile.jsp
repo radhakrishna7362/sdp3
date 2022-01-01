@@ -8,8 +8,6 @@
 <jsp:include page="styles.jsp"/>
 </head>
 <body>
-
-</body>
 <jsp:include page="user-logout.jsp"/>
 <div class="d-flex flex-column mt-3 mb-3">
     <div class="d-flex justify-content-sm-center">
@@ -26,6 +24,18 @@
                         <div class="mb-3">
 							<label for="userName" class="form-label">UserName</label>
 							<input type="text" class="form-control" id="userName" name="userName" value="${user.getUserName() }" readonly placeholder="UserName">
+						</div>
+						<div class="mb-3">
+							<label for="phoneNo" class="form-label">Phone No</label>
+							<input type="text" class="form-control" id="phoneNo" name="phoneNo" value="${user.getPhoneNo() }" readonly placeholder="Phone No">
+						</div>
+						<div class="mb-3">
+							<label for="firstName" class="form-label">First Name</label>
+							<input type="text" class="form-control" id="firstName" name="firstName" value="${user.getFirstName() }" readonly placeholder="First Name">
+						</div>
+						<div class="mb-3">
+							<label for="lastName" class="form-label">Last Name</label>
+							<input type="text" class="form-control" id="lastName" name="lastName" value="${user.getLastName() }" readonly placeholder="Last Name">
 						</div>
 						<div class="mb-3">
 							<label for="email" class="form-label">Email</label>
@@ -51,4 +61,7 @@
         </div>
     </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
+</body>
+
 </html>

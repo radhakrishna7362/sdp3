@@ -72,7 +72,7 @@ public class HouseRequestService {
 	
 	public HouseRequestData getHouseRequestData(long providerId,long houseId){
 		HouseRequestData result = new HouseRequestData();
-		List<HouseRequest> houseRequests = getHouseRequestByHouseIdAndProviderId(providerId, houseId);
+		List<HouseRequest> houseRequests = getHouseRequestByHouseIdAndProviderId(houseId, providerId);
 		if(houseRequests.size()!=0) {
 			result.setHouse(houseRepository.findById(houseRequests.get(0).getHouseId()).get());
 			result.setGuestProvider(guestProviderRepository.findById(houseRequests.get(0).getProviderId()).get());
@@ -90,7 +90,7 @@ public class HouseRequestService {
 	
 	public RejectedHouseRequestData getRejectedHouseRequestData(long providerId,long houseId){
 		RejectedHouseRequestData result = new RejectedHouseRequestData();
-		List<RejectedHouseRequest> rejectedHouseRequests = (List<RejectedHouseRequest>) rejectedHouseRequestRepository.findByHouseIdAndProviderId(providerId, houseId);
+		List<RejectedHouseRequest> rejectedHouseRequests = (List<RejectedHouseRequest>) rejectedHouseRequestRepository.findByHouseIdAndProviderId(houseId, providerId);
 		if(rejectedHouseRequests.size()!=0) {
 			List<User> u = new ArrayList<>();
 			List<RejectedHouseRequest> rhr = new ArrayList<>();
@@ -98,6 +98,8 @@ public class HouseRequestService {
 				u.add(userRepository.findById(rejectedHouseRequest.getUserId()).get());
 				rhr.add(rejectedHouseRequest);
 			});
+			result.setHouse(houseRepository.getById(houseId));
+			result.setGuestProvider(guestProviderRepository.getById(rejectedHouseRequests.get(0).getProviderId()));
 			result.setRejectedHouseRequests(rhr);
 			result.setUsers(u);
 		}
@@ -105,7 +107,6 @@ public class HouseRequestService {
 	}
 
 	public void deleteHouseRequestsByHouseId(long houseId) {
-		System.out.println("hii");
 		List<HouseRequest> houseRequests = (List<HouseRequest>) houseRequestRepository.findByHouseIdAndApprovalFalse(houseId);
 		System.out.println("byee");
 		houseRequests.forEach(houseRequest->{
@@ -131,5 +132,18 @@ public class HouseRequestService {
 			return data;
 		}
 		return null;
+	}
+
+	public void deleteHouseRequestsByUserId(long userId) {
+		List<HouseRequest> houseRequests = (List<HouseRequest>) houseRequestRepository.findByUserIdAndApprovalFalse(userId);
+		houseRequests.forEach(houseRequest->{
+			RejectedHouseRequest rhr = new  RejectedHouseRequest();
+			rhr.setRequestId(houseRequest.getId());
+			rhr.setHouseId(houseRequest.getHouseId());
+			rhr.setUserId(houseRequest.getUserId());
+			rhr.setProviderId(houseRequest.getProviderId());
+			rejectedHouseRequestRepository.save(rhr);
+			houseRequestRepository.delete(houseRequest);
+		});
 	}
 }

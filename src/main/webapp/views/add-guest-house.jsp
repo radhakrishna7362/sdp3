@@ -19,37 +19,37 @@
 				<div class="col-sm-5">
 					<div class="mb-3">
 						<label for="providerId" class="form-label">Provider Id</label>
-						<input type="text" class="form-control" id="providerId" name="providerId" value="${userId }" readonly>
+						<input type="text" class="form-control" id="providerId" name="providerId" required value="${userId }" readonly>
 					</div>
 					<div class="mb-3">
 						<label for="houseType" class="form-label">House Type</label>
-						<input type="text" class="form-control" id="houseType" name="houseType" placeholder="House Type">
+						<input type="text" class="form-control" id="houseType" name="houseType" required placeholder="House Type">
 					</div>
 					<div class="mb-3">
 						<label for="houseCity" class="form-label">House City</label>
-						<input type="text" class="form-control" id="houseCity" name="houseCity" placeholder="House City">
+						<input type="text" class="form-control" id="houseCity" name="houseCity" required placeholder="House City">
 					</div>
 					<div class="mb-3">
 						<label for="houseState" class="form-label">House State</label>
-						<input type="text" class="form-control" id="houseState" name="houseState" placeholder="House State">
+						<input type="text" class="form-control" id="houseState" name="houseState" required placeholder="House State">
 					</div>
 					<div class="mb-3">
 						<label for="houseArea" class="form-label">House Area</label>
-						<input type="text" class="form-control" id="houseArea" name="houseArea" placeholder="House Area">
+						<input type="text" class="form-control" id="houseArea" name="houseArea" required placeholder="House Area">
 					</div>
 					<div class="mb-3">
 						<label for="houseNo" class="form-label">House No</label>
-						<input type="text" class="form-control" id="houseNo" name="houseNo" placeholder="House No">
+						<input type="text" class="form-control" id="houseNo" name="houseNo" required placeholder="House No">
 					</div>
 				</div>
 				<div class="offset-1 col-sm-6">
 					<div class="mb-3">
 						<label for="file" class="form-label">House Proof</label>
-						<input type="file" class="form-control" id="file" name="file">
+						<input type="file" class="form-control" id="file" name="file" required>
 					</div>
 					<div class="mb-3">
 						<label for="img1" class="form-label">Image 1</label>
-						<input type="file" class="form-control" id="img1" name="img1">
+						<input type="file" class="form-control" id="img1" name="img1" required>
 					</div>
 					<div class="mb-3">
 						<label for="img2" class="form-label">Image 2</label>
@@ -66,6 +66,10 @@
 					<div class="mb-3">
 						<label for="img5" class="form-label">Image 5</label>
 						<input type="file" class="form-control" id="img5" name="img5">
+					</div>
+					<div class="mb-3">
+						<label for="vid" class="form-label">Video Proof</label>
+						<input type="file" class="form-control" id="vid" accept="video/mp4,video/x-m4v,video/*" name="vid">
 					</div>
 				</div>
 			</div>

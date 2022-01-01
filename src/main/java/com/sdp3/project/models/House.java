@@ -39,6 +39,12 @@ public class House {
 	@Column(name="AVAILABILITY")
 	private boolean availability;
 	
+	@Column(name="RATING")
+	private float rating;
+	
+	@Column(name="VIDEO_PROOF")
+	private String videoProof;
+	
 	@Column(name="APPROVAL")
 	private boolean approval;
 	
@@ -176,4 +182,25 @@ public class House {
 	public void setApproval(boolean approval) {
 		this.approval = approval;
 	}
+
+	public String getVideoProof() {
+		return videoProof;
+	}
+
+	public void setVideoProof(String videoProof) {
+		this.videoProof = videoProof;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+	
+	public House() {
+		this.rating=0;
+	}
+	
 }

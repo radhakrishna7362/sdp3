@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.sdp3.project.business.domain.UserHouseData;
 import com.sdp3.project.models.CompletedHouseRequest;
+import com.sdp3.project.models.GuestProvider;
 import com.sdp3.project.models.House;
 import com.sdp3.project.models.HouseRequest;
 import com.sdp3.project.repository.CompletedHouseRequestRepository;
+import com.sdp3.project.repository.GuestProviderRepository;
 import com.sdp3.project.repository.HouseRepository;
 import com.sdp3.project.repository.HouseRequestRepository;
 
@@ -19,6 +21,8 @@ public class HouseService {
 
 	@Autowired
 	private HouseRepository houseRepository;
+	@Autowired
+	private GuestProviderRepository guestProviderRepository;
 	@Autowired
 	private HouseRequestRepository houseRequestRepository;
 	@Autowired
@@ -66,37 +70,48 @@ public class HouseService {
 		return (List<House>) houseRepository.findByProviderId(id);
 	}
 	
+	public boolean currentStay(long userId) {
+		HouseRequest houseRequest = houseRequestRepository.findByUserIdAndApprovalTrue(userId);
+		if(houseRequest!=null) {
+			return true;
+		}
+		return false;
+	}
+	
 	public UserHouseData getHouseByUserId(long userId) {
 		UserHouseData data = new UserHouseData();
 		data.setCurrentStay(false);
-		List<House> houses = getAllApprovedHouses();
+		List<GuestProvider> gp = new ArrayList<>();
+		List<House> houses = (List<House>) houseRepository.findByAvailabilityTrueAndApprovalTrue();
 		List<Boolean> r = new ArrayList<>();
 		List<Boolean> pr = new ArrayList<>();
 		List<Boolean> cr = new ArrayList<>();
+		data.setCurrentStay(currentStay(userId));
 		houses.forEach(house->{
+			gp.add(guestProviderRepository.findById(house.getProviderId()).get());
 			List<HouseRequest> request = (List<HouseRequest>) houseRequestRepository.findByHouseIdAndUserIdAndApprovalTrue(house.getId(), userId);
-			if(request.size()!=0) {
+			if(!request.isEmpty()) {
 				r.add(true);
-				data.setCurrentStay(true);
 			}
 			else {
 				r.add(false);
 			}
 			List<HouseRequest> pRequest = (List<HouseRequest>) houseRequestRepository.findByHouseIdAndUserIdAndApprovalFalse(house.getId(), userId);
-			if(pRequest.size()!=0) {
+			if(!pRequest.isEmpty()) {
 				pr.add(true);
 			}
 			else {
 				pr.add(false);
 			}
 			List<CompletedHouseRequest> cRequest = (List<CompletedHouseRequest>) completedHouseRequestRepository.findByHouseIdAndUserId(house.getId(), userId);
-			if(cRequest.size()!=0) {
+			if(!cRequest.isEmpty()) {
 				cr.add(true);
 			}
 			else {
 				cr.add(false);
 			}
 		});
+		data.setGuestProvider(gp);
 		data.setHouses(houses);
 		data.setIsRequested(r);
 		data.setIsPending(pr);

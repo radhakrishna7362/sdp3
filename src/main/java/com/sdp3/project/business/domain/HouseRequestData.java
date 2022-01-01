@@ -1,5 +1,6 @@
 package com.sdp3.project.business.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sdp3.project.models.GuestProvider;
@@ -12,6 +13,13 @@ public class HouseRequestData {
 	private GuestProvider guestProvider;
 	private List<HouseRequest> houseRequests;
 	private List<User> users;
+	
+	public HouseRequestData() {
+		this.house = new House();
+		this.guestProvider = new GuestProvider();
+		this.houseRequests = new ArrayList<>();
+		this.users = new ArrayList<>();
+	}
 	
 	public List<User> getUsers() {
 		return users;

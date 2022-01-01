@@ -14,6 +14,7 @@
 <div class="m-2">
 	<a href="add-guest-house" class="btn btn-success"><strong>+</strong> Guest House</a>
 </div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 
 </html>
