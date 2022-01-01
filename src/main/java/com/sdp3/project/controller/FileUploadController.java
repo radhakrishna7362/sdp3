@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FileUploadController {
-	public static String uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/uploads";
+	public static String uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/static/uploads";
 	
 	public static String upload(MultipartFile file) {
 		if(file.isEmpty())

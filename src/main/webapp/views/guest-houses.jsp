@@ -12,16 +12,19 @@
 	<div class="offset-1 col-10 py-4">
 		<h1>Guest Houses</h1>
 		<c:forEach var="house" items="${houses}">
-			<div class="card d-flex flex-column">
+			<div class="card d-flex flex-column mb-3">
 			  <div class="row row-0 flex-fill">
-			    <div class="col-md-3">
+			    <div class="col-md-4">
 			      <a href="#">
-			        <img src="${house.getImage2() }" class="w-75 h-100 object-cover" alt="Card side image">
+			        <a href=${house.getImage2() }  class="w-50 h-100 object-cover" alt="Card side image">
 			      </a>
 			    </div>
-			    <div class="col">
+			    <div class="col-md-8">
 			      <div class="card-body">
-			      	
+			      	<div>
+			      		Room Type: ${house.getHouseType() }
+			      		<a href="/add-house-request/${house.getId() }" class="btn btn-primary">Request</a>
+			      	</div>
 			      </div>
 			    </div>
 			  </div>

@@ -25,7 +25,7 @@
 		        <tbody>
 		        	<c:forEach var="house" items="${houses}">
 		            <tr>
-		                <td>${house.getId() }</td>
+		                <td><a href="/guest-provider-house-requests/${house.getId() }">${house.getId() }</a></td>
 		                <td>${house.getProviderId() }</td>
 						<td>${house.getHouseType() }</td>
 		                <td>${house.getHouseCity() }</td>

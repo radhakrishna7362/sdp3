@@ -2,6 +2,7 @@ package com.sdp3.project.controller;
 
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -64,6 +65,21 @@ public class GuestProviderController {
 		return mv;
 	}
 	
+	public String generateString() {
+		int leftLimit = 97; // letter 'a'
+	    int rightLimit = 122; // letter 'z'
+	    int targetStringLength = 10;
+	    Random random = new Random();
+	    StringBuilder buffer = new StringBuilder(targetStringLength);
+	    for (int i = 0; i < targetStringLength; i++) {
+	        int randomLimitedInt = leftLimit + (int) 
+	          (random.nextFloat() * (rightLimit - leftLimit + 1));
+	        buffer.append((char) randomLimitedInt);
+	    }
+	    String generatedString = buffer.toString();
+	    return generatedString;
+	}
+	
 	@PostMapping("/guest-provider-register")
 	public ModelAndView register(@ModelAttribute("guestProvider")GuestProvider guestProvider, HttpSession session, @RequestParam("file") MultipartFile file) {
 		guestProvider.setPassword(passwordEncoder(guestProvider.getPassword()));
@@ -116,5 +132,4 @@ public class GuestProviderController {
 		ModelAndView mv = new ModelAndView("redirect:/admin-home");
 		return mv;
 	}
-
 }

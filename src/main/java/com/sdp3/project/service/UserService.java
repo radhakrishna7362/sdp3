@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.sdp3.project.models.User;
 import com.sdp3.project.repository.UserRepository;
@@ -17,7 +16,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public void addUser(User user, MultipartFile file) {
+	public void addUser(User user) {
 		userRepository.save(user);
 	}
 	
@@ -31,7 +30,14 @@ public class UserService {
 	}
 	
 	public void updateUser(User user) {
-		userRepository.save(user);
+		User u = userRepository.getById(user.getId());
+		u.setId(user.getId());
+		u.setUserName(user.getUserName());
+		u.setEmail(user.getEmail());
+		u.setGovernmentId(user.getGovernmentId());
+		u.setRole(user.getRole());
+		u.setPassword(user.getPassword());
+		userRepository.save(u);
 	}
 	
 	public void deleteUserById(long id) {

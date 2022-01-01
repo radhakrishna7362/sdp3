@@ -8,14 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PROVIDER")
-public class GuestProvider {
+@Table(name="REJECTED_PROVIDER")
+public class RejectedGuestProvider {
 	
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Column(name="GUEST_PROVIDER_ID")
+	private long guestProviderId;
+
 	@Column(name="FIRST_NAME")
 	private String firstName;
 	
@@ -49,23 +52,12 @@ public class GuestProvider {
 	@Column(name="ADDRESS_PROOF")
 	private String addressProof;
 	
-	@Column(name="APPROVAL")
-	private boolean approval;
-
-	public void setApproval(boolean approval) {
-		this.approval = approval;
-	}
-
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public boolean isApproval() {
-		return approval;
 	}
 
 	public String getUserName() {
@@ -154,5 +146,13 @@ public class GuestProvider {
 
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
+	}
+	
+	public long getGuestProviderId() {
+		return guestProviderId;
+	}
+
+	public void setGuestProviderId(long guestProviderId) {
+		this.guestProviderId = guestProviderId;
 	}
 }

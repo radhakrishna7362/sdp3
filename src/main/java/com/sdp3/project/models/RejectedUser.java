@@ -8,14 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PROVIDER")
-public class GuestProvider {
+@Table(name="REJECTED_USER")
+public class RejectedUser {
 	
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Column(name="USER_ID")
+	private long userId;
+
 	@Column(name="FIRST_NAME")
 	private String firstName;
 	
@@ -36,36 +39,19 @@ public class GuestProvider {
 	
 	@Column(name="GOVERNMENT_ID")
 	private String governmentId;
-	
+
 	@Column(name="GOVERNMENT_ID_PROOF")
 	private String governmentIdProof;
 	
 	@Column(name="ROLE")
 	private String role;
 	
-	@Column(name="ADDRESS")
-	private String address;
-	
-	@Column(name="ADDRESS_PROOF")
-	private String addressProof;
-	
-	@Column(name="APPROVAL")
-	private boolean approval;
-
-	public void setApproval(boolean approval) {
-		this.approval = approval;
-	}
-
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public boolean isApproval() {
-		return approval;
 	}
 
 	public String getUserName() {
@@ -115,23 +101,7 @@ public class GuestProvider {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getAddressProof() {
-		return addressProof;
-	}
-
-	public void setAddressProof(String addressProof) {
-		this.addressProof = addressProof;
-	}
-
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -155,4 +125,13 @@ public class GuestProvider {
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+	
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
 }

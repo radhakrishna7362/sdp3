@@ -37,7 +37,7 @@
 		                <td>${g.getEmail() }</td>
 		                <td>${g.getGovernmentId() }</td>
 		                <td>${g.getAddress() }</td>
-		                <td><a href=${g.getGovernmentIdProof() } target="_blank">Read more</a></td>
+		                <td><a href="/uploads/${g.getGovernmentIdProof() }" target="_blank">Read more</a></td>
 		            </tr>
 		            </c:forEach>
 		        </tbody>
@@ -69,7 +69,7 @@
 		                <td>${user.getUserName() }</td>
 		                <td>${user.getEmail() }</td>
 		                <td>${user.getGovernmentId() }</td>
-		                <td><a href=${user.getGovernmentIdProof() } target="_blank">Read more</a></td>
+		                <td><a href="/uploads/${user.getGovernmentIdProof() }" target="_blank">Read more</a></td>
 		            </tr>
 		            </c:forEach>
 		        </tbody>

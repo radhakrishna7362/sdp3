@@ -1,6 +1,5 @@
 package com.sdp3.project.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,17 +36,12 @@ public class GuestProviderService {
 		if(gp==null) {
 			return false;
 		}
-//		return gp.isApproval() && passwordEncoder.matches(guestProvider.getPassword(), gp.getPassword());
-		return passwordEncoder.matches(guestProvider.getPassword(), gp.getPassword());
+		return gp.isApproval() && passwordEncoder.matches(guestProvider.getPassword(), gp.getPassword());
+//		return passwordEncoder.matches(guestProvider.getPassword(), gp.getPassword());
 	}	
 
 	public List<GuestProvider> getAllPendingApprovals(){
-		List<GuestProvider> guestProvider = new ArrayList<>();
-		Iterable<GuestProvider> gp = guestProviderRepository.findByApprovalFalse();
-		gp.forEach(g->{
-			guestProvider.add(g);
-		});
-		return guestProvider;
+		return (List<GuestProvider>) guestProviderRepository.findByApprovalFalse();
 	}
 	
 	public List<GuestProvider> getAllApprovedProviders(){

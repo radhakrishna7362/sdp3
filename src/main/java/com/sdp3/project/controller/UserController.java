@@ -2,7 +2,9 @@ package com.sdp3.project.controller;
 
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.Random;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class UserController {
 			session.setAttribute("userName", user.getUserName());
 			User u = userService.getUserByUserName(user.getUserName());
 			session.setAttribute("userId", u.getId());
-			mv = new ModelAndView("redirect:/user-home");
+			mv = new ModelAndView("redirect:/guest-houses/"+u.getId());
 		}
 		else{
 			mv = new ModelAndView();
@@ -67,14 +69,29 @@ public class UserController {
 		return mv;
 	}
 	
+	public String generateString() {
+		int leftLimit = 97; // letter 'a'
+	    int rightLimit = 122; // letter 'z'
+	    int targetStringLength = 10;
+	    Random random = new Random();
+	    StringBuilder buffer = new StringBuilder(targetStringLength);
+	    for (int i = 0; i < targetStringLength; i++) {
+	        int randomLimitedInt = leftLimit + (int) 
+	          (random.nextFloat() * (rightLimit - leftLimit + 1));
+	        buffer.append((char) randomLimitedInt);
+	    }
+	    String generatedString = buffer.toString();
+	    return generatedString;
+	}
+	
 	@PostMapping("/register")
-	public ModelAndView registrationData(@ModelAttribute("user")User user, @RequestParam("file") MultipartFile file) {
+	public ModelAndView registrationData(@ModelAttribute("user")User user, @RequestParam("file") MultipartFile file) throws MessagingException  {
 		user.setPassword(passwordEncoder(user.getPassword()));
 		user.setRole("TRAVELLER");
 		user.setApproval(false);
 		user.setGovernmentIdProof(FileUploadController.upload(file));
-		userService.addUser(user,file);
-//		emailService.sendSimpleMessage(user.getEmail(), "Welcome to FeelHome Family", "Your Registration is Successful, You will receive a mail of approval in a few hours.");
+		userService.addUser(user);
+//		emailService.sendHtmlMessage(user.getEmail(), "Welcome to FeelHome Family", "<h1>Your Registration is Successful, You will receive a mail of approval in a few hours.</h1>");
 		ModelAndView mv = new ModelAndView("redirect:/login");
 		return mv;
 		
