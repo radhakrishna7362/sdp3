@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sdp3.project.models.RejectedUser;
 import com.sdp3.project.models.User;
+import com.sdp3.project.service.RejectedUserService;
 //import com.sdp3.project.service.EmailService;
 import com.sdp3.project.service.UserService;
 
@@ -26,16 +28,11 @@ import com.sdp3.project.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RejectedUserService rejectedUserService;
 	
 //	@Autowired
 //	private EmailService emailService;
-	
-	@GetMapping("/")
-	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("home");
-		return mv;
-	}
 	
 	@GetMapping("/login")
 	public ModelAndView login() {
@@ -170,6 +167,26 @@ public class UserController {
 		user.setApproval(true);
 		userService.updateUser(user);
 		ModelAndView mv = new ModelAndView("redirect:/admin-home");
+		return mv;
+	}
+	
+	@GetMapping("/user-reject/{Id}")
+	public ModelAndView GuestProviderReject(@PathVariable("Id")long Id) {
+		User user = userService.getUserById(Id);
+		RejectedUser ru = new RejectedUser();
+		ru.setEmail(user.getEmail());
+		ru.setFirstName(user.getFirstName());
+		ru.setGovernmentId(user.getGovernmentId());
+		ru.setGovernmentIdProof(user.getGovernmentIdProof());
+		ru.setLastName(user.getLastName());
+		ru.setPassword(user.getPassword());
+		ru.setPhoneNo(user.getPhoneNo());
+		ru.setRole(user.getRole());
+		ru.setUserId(Id);
+		ru.setUserName(user.getUserName());
+		rejectedUserService.addRejectedUser(ru);
+		userService.deleteUserById(Id);
+		ModelAndView mv = new ModelAndView("redirect:/pending-user-approvals");
 		return mv;
 	}
 }

@@ -6,12 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sdp3.project.business.domain.CompletedHouseRequestData;
 import com.sdp3.project.business.domain.HouseRequestData;
 import com.sdp3.project.business.domain.RejectedHouseRequestData;
 import com.sdp3.project.business.domain.UserHouseRequestData;
+import com.sdp3.project.models.CompletedHouseRequest;
 import com.sdp3.project.models.HouseRequest;
 import com.sdp3.project.models.RejectedHouseRequest;
 import com.sdp3.project.models.User;
+import com.sdp3.project.repository.CompletedHouseRequestRepository;
 import com.sdp3.project.repository.GuestProviderRepository;
 import com.sdp3.project.repository.HouseRepository;
 import com.sdp3.project.repository.HouseRequestRepository;
@@ -25,6 +28,8 @@ public class HouseRequestService {
 	private HouseRequestRepository houseRequestRepository;
 	@Autowired
 	private RejectedHouseRequestRepository rejectedHouseRequestRepository;
+	@Autowired
+	private CompletedHouseRequestRepository completedHouseRequestRepository;
 	@Autowired
 	private HouseRepository houseRepository;
 	@Autowired
@@ -101,6 +106,24 @@ public class HouseRequestService {
 			result.setHouse(houseRepository.getById(houseId));
 			result.setGuestProvider(guestProviderRepository.getById(rejectedHouseRequests.get(0).getProviderId()));
 			result.setRejectedHouseRequests(rhr);
+			result.setUsers(u);
+		}
+		return result;
+	}
+	
+	public CompletedHouseRequestData getCompletedHouseRequestData(long providerId,long houseId){
+		CompletedHouseRequestData result = new CompletedHouseRequestData();
+		List<CompletedHouseRequest> completedHouseRequests = (List<CompletedHouseRequest>) completedHouseRequestRepository.findByHouseIdAndProviderId(houseId, providerId);
+		if(completedHouseRequests.size()!=0) {
+			List<User> u = new ArrayList<>();
+			List<CompletedHouseRequest> rhr = new ArrayList<>();
+			completedHouseRequests.forEach(completedHouseRequest->{
+				u.add(userRepository.findById(completedHouseRequest.getUserId()).get());
+				rhr.add(completedHouseRequest);
+			});
+			result.setHouse(houseRepository.getById(houseId));
+			result.setGuestProvider(guestProviderRepository.getById(completedHouseRequests.get(0).getProviderId()));
+			result.setCompletedHouseRequests(rhr);
 			result.setUsers(u);
 		}
 		return result;

@@ -15,22 +15,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sdp3.project.business.domain.CompletedHouseRequestData;
 import com.sdp3.project.business.domain.HouseRequestData;
 import com.sdp3.project.business.domain.RejectedHouseRequestData;
 import com.sdp3.project.business.domain.UserHouseData;
 import com.sdp3.project.business.domain.UserHouseRequestData;
 import com.sdp3.project.models.Comment;
 import com.sdp3.project.models.CompletedHouseRequest;
+import com.sdp3.project.models.GuestProvider;
 import com.sdp3.project.models.House;
 import com.sdp3.project.models.HouseRequest;
 import com.sdp3.project.models.Rating;
 import com.sdp3.project.models.RejectedHouse;
+import com.sdp3.project.models.RejectedHouseRequest;
+import com.sdp3.project.models.User;
 import com.sdp3.project.service.CommentService;
 import com.sdp3.project.service.CompletedHouseRequestService;
+import com.sdp3.project.service.GuestProviderService;
 import com.sdp3.project.service.HouseRequestService;
 import com.sdp3.project.service.HouseService;
 import com.sdp3.project.service.RatingService;
+import com.sdp3.project.service.RejectedHouseRequestService;
 import com.sdp3.project.service.RejectedHouseService;
+import com.sdp3.project.service.UserService;
 
 @Controller
 public class HouseController {
@@ -38,15 +45,37 @@ public class HouseController {
 	@Autowired
 	private HouseService houseService;
 	@Autowired
+	private GuestProviderService guestProviderService;
+	@Autowired
+	private UserService userService;
+	@Autowired
 	private RejectedHouseService rejectedHouseService;
 	@Autowired
 	private CommentService commentService;
 	@Autowired
 	private HouseRequestService houseRequestService;
 	@Autowired
+	private RejectedHouseRequestService rejectedHouseRequestService;
+	@Autowired
 	private CompletedHouseRequestService completedHouseRequestService;
 	@Autowired
 	private RatingService ratingService;
+	
+	@GetMapping("/")
+	public ModelAndView index() {
+		List<House> houses = houseService.getAllApprovedHouses();
+		int noOfHouses = houses.size();
+		List<GuestProvider> providers = guestProviderService.getAllApprovedProviders();
+		int noOfProviders = providers.size();
+		List<User> users = userService.getAllApprovedUsers();
+		int noOfUsers = users.size();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("home");
+		mv.addObject("noOfHouses",noOfHouses);
+		mv.addObject("noOfProviders",noOfProviders);
+		mv.addObject("noOfUsers",noOfUsers);
+		return mv;
+	}
 	
 	@GetMapping("/add-guest-house")
 	public ModelAndView addHouse() {
@@ -81,7 +110,7 @@ public class HouseController {
 		h.setImage3(FileUploadController.upload(img3));
 		h.setImage4(FileUploadController.upload(img4));
 		h.setImage5(FileUploadController.upload(img5));
-		h.setVideoProof(FileUploadController.upload(vid));
+		h.setVideoProof(FileUploadController.storeFile(vid));
 		houseService.addHouse(h);
 		long id = (long)session.getAttribute("userId");
 		ModelAndView mv = new ModelAndView("redirect:/guest-provider-houses/"+id);
@@ -171,10 +200,12 @@ public class HouseController {
 		long providerId = (long)session.getAttribute("userId");
 		HouseRequestData data = houseRequestService.getHouseRequestData(providerId, houseId);
 		RejectedHouseRequestData rejectedData = houseRequestService.getRejectedHouseRequestData(providerId, houseId);
+		CompletedHouseRequestData completedData = houseRequestService.getCompletedHouseRequestData(providerId, houseId);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("guest-provider-requests");
 		mv.addObject("houseRequestData", data);
 		mv.addObject("rejectedHouseRequestData",rejectedData);
+		mv.addObject("completedHouseRequestData",completedData);
 		return mv;
 	}
 	
@@ -188,6 +219,20 @@ public class HouseController {
 		houseRequestService.updateHouseRequest(request);
 		houseRequestService.deleteHouseRequestsByHouseId(request.getHouseId());
 		houseRequestService.deleteHouseRequestsByUserId(request.getUserId());
+		ModelAndView mv = new ModelAndView("redirect:/guest-provider-house-requests/"+request.getHouseId());
+		return mv;
+	}
+	
+	@GetMapping("/reject-house-request/{requestId}")
+	public ModelAndView RejectHouseRequest(@PathVariable("requestId") long requestId) {
+		HouseRequest request = houseRequestService.getHouseRequestById(requestId);
+		RejectedHouseRequest rr = new RejectedHouseRequest();
+		rr.setHouseId(request.getHouseId());
+		rr.setProviderId(request.getProviderId());
+		rr.setRequestId(request.getId());
+		rr.setUserId(request.getUserId());
+		rejectedHouseRequestService.addHouseRequest(rr);
+		houseRequestService.deleteHouseRequest(requestId);
 		ModelAndView mv = new ModelAndView("redirect:/guest-provider-house-requests/"+request.getHouseId());
 		return mv;
 	}

@@ -18,13 +18,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sdp3.project.models.GuestProvider;
+import com.sdp3.project.models.RejectedGuestProvider;
 import com.sdp3.project.service.GuestProviderService;
+import com.sdp3.project.service.RejectedGuestProviderService;
 
 @Controller
 public class GuestProviderController {
 
 	@Autowired
 	private GuestProviderService guestProviderService;
+	@Autowired
+	private RejectedGuestProviderService rejectedGuestProviderService;
 	
 	@GetMapping("/guest-provider-home")
 	public ModelAndView home() {
@@ -130,6 +134,28 @@ public class GuestProviderController {
 		gp.setApproval(true);
 		guestProviderService.updateGuestProvider(gp);
 		ModelAndView mv = new ModelAndView("redirect:/admin-home");
+		return mv;
+	}
+	
+	@GetMapping("/guest-provider-reject/{Id}")
+	public ModelAndView GuestProviderReject(@PathVariable("Id")long Id) {
+		GuestProvider gp = guestProviderService.getGuestProviderById(Id);
+		RejectedGuestProvider rgp = new RejectedGuestProvider();
+		rgp.setAddress(gp.getAddress());
+		rgp.setAddressProof(gp.getAddressProof());
+		rgp.setEmail(gp.getEmail());
+		rgp.setFirstName(gp.getFirstName());
+		rgp.setGovernmentId(gp.getGovernmentId());
+		rgp.setGovernmentIdProof(gp.getGovernmentIdProof());
+		rgp.setGuestProviderId(Id);
+		rgp.setLastName(gp.getLastName());
+		rgp.setPassword(gp.getPassword());
+		rgp.setPhoneNo(gp.getPhoneNo());
+		rgp.setRole(gp.getRole());
+		rgp.setUserName(gp.getUserName());
+		rejectedGuestProviderService.addRejectedGuestProvider(rgp);
+		guestProviderService.deleteGuestProvider(Id);
+		ModelAndView mv = new ModelAndView("redirect:/pending-guest-provider-approvals");
 		return mv;
 	}
 	

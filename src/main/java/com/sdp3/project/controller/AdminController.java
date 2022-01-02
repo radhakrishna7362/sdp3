@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sdp3.project.models.GuestProvider;
+import com.sdp3.project.models.House;
 import com.sdp3.project.models.User;
 import com.sdp3.project.service.GuestProviderService;
+import com.sdp3.project.service.HouseService;
 import com.sdp3.project.service.UserService;
 
 @Controller
@@ -21,11 +23,12 @@ public class AdminController {
 	
 	private GuestProviderService guestProviderService;
 	private UserService userService;
-	
+	private HouseService houseService;
 	@Autowired
-	public AdminController(GuestProviderService guestProviderService,UserService userService) {
+	public AdminController(GuestProviderService guestProviderService,UserService userService,HouseService houseService) {
 		this.guestProviderService = guestProviderService;
 		this.userService = userService;
+		this.houseService = houseService;
 	}
 	@GetMapping("/admin-login")
 	public ModelAndView AdminLogin() {
@@ -65,8 +68,10 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		List<GuestProvider> gp = guestProviderService.getAllApprovedProviders();
 		List<User> users = userService.getAllApprovedUsers();
+		List<House> houses = houseService.getAllApprovedHouses();
 		mv.addObject("users",users);
 		mv.addObject("gp",gp);
+		mv.addObject("houses",houses);
 		mv.setViewName("admin-home");
 		return mv;
 	}

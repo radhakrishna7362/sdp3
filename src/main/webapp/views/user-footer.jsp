@@ -3,8 +3,6 @@
       <div class="row text-center align-items-center flex-row-reverse">
         <div class="col-lg-auto ms-lg-auto">
           <ul class="list-inline list-inline-dots mb-0">
-            <li class="list-inline-item"><a href="#" class="link-secondary">About Us</a></li>
-            <li class="list-inline-item"><a href="#" class="link-secondary">Contact Us</a></li>
             <li class="list-inline-item"><a href="#" target="_blank" class="link-secondary" rel="noopener">Happy Customers😎</a></li>
           </ul>
         </div>

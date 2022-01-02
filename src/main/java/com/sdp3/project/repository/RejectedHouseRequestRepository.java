@@ -7,4 +7,5 @@ import com.sdp3.project.models.RejectedHouseRequest;
 public interface RejectedHouseRequestRepository extends JpaRepository<RejectedHouseRequest,Long> {
 	Iterable<RejectedHouseRequest> findByHouseId(long houseId);
 	Iterable<RejectedHouseRequest> findByHouseIdAndProviderId(long houseId,long providerId);
+	Iterable<RejectedHouseRequest> findByHouseIdAndUserId(long houseId,long userId);
 }

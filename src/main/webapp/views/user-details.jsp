@@ -14,7 +14,7 @@
 <div class="m-2">
 	<h1 align='center'>User Approval</h1>
 	<div class="row">
-		<div class="col-sm-6">
+		<div class="col-md-6" style="padding:25px">
 	    	<div class="card">
 	    		<div class="card-body">
 	    			<table class="table table-striped">
@@ -48,13 +48,14 @@
 	    		</div>
 	    	</div>
 	    </div>
-	    <div class="offset-1 col-sm-5">
+	    <div class="offset-1 col-md-5" style="padding:25px">
 			<embed src="/uploads/${user.getGovernmentIdProof() }" width="600px" height="500px" />
 		</div>
 	</div>
 </div>
 <div align='center'>
 <a class="btn btn-primary" href='/user-approval/${user.getId()}'>Approve</a>
+<a class="btn btn-danger" href='/user-reject/${user.getId()}'>Reject</a>
 <a class="btn btn-dark" href='/pending-user-approvals'>Back</a>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,4 +26,17 @@ public class FileUploadController {
 		}
 		return fileName;
 	}
+	
+	public static String storeFile(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+
+        try {
+        	Path fileNameAndPath = Paths.get(uploadDirectory,file.getOriginalFilename());
+            Files.copy(file.getInputStream(), fileNameAndPath, StandardCopyOption.REPLACE_EXISTING);
+            return fileName;
+        } catch (IOException e) {
+			e.printStackTrace();
+		}
+        return fileName;
+    }
 }

@@ -37,13 +37,13 @@
 		                <td>${house.getHouseArea() }</td>
 		                <td>
 		                    <c:if test="${house.isApproval()}">  
-							     Approved
+							     <span class="badge bg-green">Approved</span>
 							</c:if>
 							<c:if test="${!house.isApproval()}">  
-							     Pending
+							     <span class="badge bg-blue">Pending</span>
 							</c:if>
 		                </td>
-		                <td><a href="/guest-provider-house-requests/${house.getId() }">Check here</a></td>
+		                <td><a class="btn-sm btn-primary" href="/guest-provider-house-requests/${house.getId() }">Check here</a></td>
 		            </tr>
 		            </c:forEach>
 		        </tbody>

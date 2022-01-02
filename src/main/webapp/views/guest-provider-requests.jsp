@@ -40,10 +40,12 @@
 						   		<td>${u.getUserName() }</td>
 								<td>
 									<c:if test="${!houseRequestData.getHouseRequests().get(status.index).getApproval()}">  
-										<a href="/accept-house-request/${houseRequestData.getHouseRequests().get(status.index).getId() }">Accept</a>
+										<a class="btn-sm btn-primary" href="/accept-house-request/${houseRequestData.getHouseRequests().get(status.index).getId() }">Accept</a>
+										
+										<a class="btn-sm btn-danger" href="/reject-house-request/${houseRequestData.getHouseRequests().get(status.index).getId() }">Reject</a>
 									</c:if>
 									<c:if test="${houseRequestData.getHouseRequests().get(status.index).getApproval()}">  
-										Assigned
+										<span class="badge bg-green">Assigned</span>
 									</c:if>
 								</td>
 				        	</tr>
@@ -93,6 +95,46 @@
 			    </table>
 		   	</c:if>
 		   	<c:if test="${rejectedHouseRequestData.getUsers().isEmpty() }">
+		   		No Rejected Requests
+		   	</c:if>
+	    </div>
+	</div>
+</div>
+<div class="m-2">
+	<div class="card">
+	    <div class="card-body">	    
+		    <h3 class="card-title">Completed House Requests</h3>
+		   	<c:if test="${!completedHouseRequestData.getUsers().isEmpty()}">
+		   		<table class="table table-striped">
+			        <thead>
+			        	<th scope="col">House Request Id</th>
+			        	<th scope="col">House Id</th>
+			        	<th scope="col">Provider UserName</th>
+			        	<th scope="col">House Type</th>
+			            <th scope="col">House City</th>
+			            <th scope="col">House State</th>
+			            <th scope="col">House Area</th>
+			            <th scope="col">User Id</th>
+			            <th scope="col">User Name</th>
+			        </thead>
+			        <tbody>
+				   		<c:forEach var="u" items="${completedHouseRequestData.getUsers()}" varStatus="status">
+					   		<tr>
+					   			<td>${completedHouseRequestData.getCompletedHouseRequests().get(status.index).getId() }</td>
+						   		<td>${completedHouseRequestData.getHouse().getId() }</td>
+						   		<td>${completedHouseRequestData.getGuestProvider().getUserName() }</td>
+						   		<td>${completedHouseRequestData.getHouse().getHouseType() }</td>
+						   		<td>${completedHouseRequestData.getHouse().getHouseCity() }</td> 								   		
+						   		<td>${completedHouseRequestData.getHouse().getHouseState() }</td>
+						   		<td>${completedHouseRequestData.getHouse().getHouseArea() }</td>
+						   		<td>${u.getId() }</td>
+						   		<td>${u.getUserName() }</td>
+				        	</tr>
+					   	</c:forEach>
+			        </tbody>
+			    </table>
+		   	</c:if>
+		   	<c:if test="${completedHouseRequestData.getUsers().isEmpty() }">
 		   		No Rejected Requests
 		   	</c:if>
 	    </div>
