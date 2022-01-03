@@ -45,14 +45,14 @@
                   </span>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
               	<a class="nav-link" href="#" >
                   <span class="nav-link-title">
                     Travelling Places
                   </span>
                 </a>
               </li>
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" href="#" >
                   <span class="nav-link-title">
                     About

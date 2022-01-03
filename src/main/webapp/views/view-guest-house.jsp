@@ -71,7 +71,7 @@
 	<div class="row row-0 justify-content-center">
 		<div class="col-sm-4">
 			<video width="500" height="240" controls>
-			  <source src="/uploads/testVideo.mp4" type="video/mp4">
+			  <source src="/uploads/test.mp4" type="video/mp4">
 			</video>
 		</div>
 	</div>

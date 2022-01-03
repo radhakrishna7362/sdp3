@@ -66,6 +66,7 @@
 	    </dependency>
 	</dependencies>
 	<build>
+		<finalName>spring-boot-web-app-aws</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

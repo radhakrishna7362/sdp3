@@ -111,10 +111,7 @@ public class UserController {
 	public ModelAndView logout(HttpSession session) {
 		session.removeAttribute("userName");
 		session.removeAttribute("userId");
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("home");
-		String msg="LoggedOut Successfully";
-		mv.addObject("msg",msg);
+		ModelAndView mv = new ModelAndView("redirect:/");
 		return mv;
 	}
 	

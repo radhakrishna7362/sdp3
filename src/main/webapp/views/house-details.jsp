@@ -58,10 +58,15 @@
 <a class="btn btn-danger" href='/house-reject/${house.getId()}'>Reject</a>
 <a class="btn btn-dark" href='/pending-house-approvals'>Back</a>
 </div>
-<div class="m-2">
-	<video width="320" height="240" controls>
-	  <source src="/uploads/${house.getVideoProof() }" type="video/mp4">
-	</video>
+<div class="mt-4">
+	<div class="text-center"><h1>Video Proof</h1></div>
+	<div class="row row-0 justify-content-center">
+		<div class="col-sm-4">
+			<video width="500" height="240" controls>
+			  <source src="/uploads/test.mp4" type="video/mp4">
+			</video>
+		</div>
+	</div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
