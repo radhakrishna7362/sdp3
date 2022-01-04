@@ -9,6 +9,7 @@ D:\_B.Tech\B.TECH 3RD YEAR 1ST SEM\SDP3\SDP PRACTICE\SPRING BOOT\sdp3-project\sr
 D:\_B.Tech\B.TECH 3RD YEAR 1ST SEM\SDP3\SDP PRACTICE\SPRING BOOT\sdp3-project\src\main\java\com\sdp3\project\models\Comment.java
 D:\_B.Tech\B.TECH 3RD YEAR 1ST SEM\SDP3\SDP PRACTICE\SPRING BOOT\sdp3-project\src\main\java\com\sdp3\project\repository\RejectedHouseRequestRepository.java
 D:\_B.Tech\B.TECH 3RD YEAR 1ST SEM\SDP3\SDP PRACTICE\SPRING BOOT\sdp3-project\src\main\java\com\sdp3\project\repository\CompletedHouseRequestRepository.java
+D:\_B.Tech\B.TECH 3RD YEAR 1ST SEM\SDP3\SDP PRACTICE\SPRING BOOT\sdp3-project\src\main\java\com\sdp3\project\business\domain\Result.java
 D:\_B.Tech\B.TECH 3RD YEAR 1ST SEM\SDP3\SDP PRACTICE\SPRING BOOT\sdp3-project\src\main\java\com\sdp3\project\config\EmailConfig.java
 D:\_B.Tech\B.TECH 3RD YEAR 1ST SEM\SDP3\SDP PRACTICE\SPRING BOOT\sdp3-project\src\main\java\com\sdp3\project\service\GuestProviderService.java
 D:\_B.Tech\B.TECH 3RD YEAR 1ST SEM\SDP3\SDP PRACTICE\SPRING BOOT\sdp3-project\src\main\java\com\sdp3\project\service\RejectedUserService.java

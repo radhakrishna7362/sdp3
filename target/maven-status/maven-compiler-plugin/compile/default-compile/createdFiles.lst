@@ -1,6 +1,7 @@
 com\sdp3\project\repository\UserRepository.class
 com\sdp3\project\models\HouseRequest.class
 com\sdp3\project\Sdp3ProjectApplication.class
+com\sdp3\project\business\domain\Result.class
 com\sdp3\project\models\Comment.class
 com\sdp3\project\service\RejectedHouseService.class
 com\sdp3\project\repository\CommentRepository.class

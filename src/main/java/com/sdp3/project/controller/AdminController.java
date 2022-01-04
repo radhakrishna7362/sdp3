@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sdp3.project.business.domain.Result;
 import com.sdp3.project.models.GuestProvider;
 import com.sdp3.project.models.House;
 import com.sdp3.project.models.User;
@@ -34,6 +37,26 @@ public class AdminController {
 	public ModelAndView AdminLogin() {
 		ModelAndView mv = new ModelAndView("admin-login","user",new User());
 		mv.setViewName("admin-login");
+		return mv;
+	}
+	
+	@GetMapping("/test")
+	public ModelAndView test() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("test.html");
+		return mv;
+	}
+	
+	@PostMapping("/test")
+	public ModelAndView Hiitest(@RequestParam("username")String UserName, @RequestParam("password")String Password, RestTemplate restTemplate) {
+		System.out.println(UserName);
+		System.out.println(Password);
+		
+		Result result = restTemplate.getForObject("https://akira-rest-api.herokuapp.com/getMetaData/"+UserName+"/"+Password+"/?format=json", Result.class);
+		System.out.println(result.getMetaKey());
+//		System.out.println(result);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("success.html");
 		return mv;
 	}
 	
